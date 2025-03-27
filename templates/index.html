@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>ContraAposta Desportiva</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Calculadora de Contra-Aposta</h1>
+        <form method="POST">
+            <label>Valor da aposta inicial (€):</label>
+            <input type="number" step="0.01" name="aposta_inicial" required>
+
+            <label>Odd da aposta inicial:</label>
+            <input type="number" step="0.01" name="odd_inicial" required>
+
+            <label>Odd da contra-aposta (opcional):</label>
+            <input type="number" step="0.01" name="odd_contra">
+
+            <button type="submit">Calcular</button>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado">
+                <h2>📊 Resultado com odd fornecida:</h2>
+                <p>Aposta sugerida na contra-aposta: <strong>{{ resultado.aposta_contra }}€</strong></p>
+                <p>Lucro se ganhar aposta inicial: <strong>{{ resultado.lucro_inicial }}€</strong></p>
+                <p>Lucro se ganhar contra-aposta: <strong>{{ resultado.lucro_contra }}€</strong></p>
+            </div>
+        {% endif %}
+
+        {% if melhor %}
+            <div class="resultado">
+                <h2>💡 Melhor cenário possível:</h2>
+                <p>Melhor odd para contra-apostar: <strong>{{ melhor.melhor_odd }}</strong></p>
+                <p>Valor a apostar: <strong>{{ melhor.melhor_aposta }}€</strong></p>
+                <p>Lucro máximo possível: <strong>{{ melhor.melhor_lucro }}€</strong></p>
+            </div>
+        {% endif %}
+    </div>
+    <div class="apostar-canto">
+        <p>🎲 Queres apostar?</p>
+        <div class="logos-apostas">
+            <a href="https://www.betclic.pt" target="_blank">
+                <img src="{{ url_for('static', filename='betclic.png') }}" alt="Betclic">
+            </a>
+            <a href="https://leon230.casino/registration?qtag=a33746_t44141_c222_salvini2" target="_blank">
+                <img src="{{ url_for('static', filename='leon.png') }}" alt="LeonBet">
+            </a>
+            <a href="https://www.betano.pt" target="_blank">
+                <img src="{{ url_for('static', filename='betano.png') }}" alt="Betano">
+            </a>
+        </div>
+    </div>    
+</body>
+</html>
